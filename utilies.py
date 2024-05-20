@@ -110,24 +110,27 @@ def model_GR(params):
 
 bilby.core.utils.random.seed(88170235)
 
-partial_params={'theta_jn': 2.8289,
- 'luminosity_distance': 455.61617115135334,
+
+
+
+partial_params={'theta_jn': 3.097067,
+ 'luminosity_distance': 557.248554,
  'ra': 0.97,
  'dec': -1.271,
  #'azimuth': 2.8110605307230103,
  #'zenith': 2.3450004587195976,
- 'mass_1': 37.557,
- 'mass_2': 34.091,
- 'a_1': 0.009,
- 'a_2': 0.138,
- 'tilt_1': 1.63,
- 'tilt_2': 1.72,
- 'psi': 1.4777795108631158,
- 'phase': 3.4883939708111518,
- 'geocent_time': 1126259462.410206,
- 'time_jitter': 2.341069490006465e-06,
- 'phi_12': 3.0382959521018726,
- 'phi_jl': 3.2,
+ 'mass_1': 37.973945,
+ 'mass_2': 32.408403,
+ 'a_1': 0.407249,
+ 'a_2': 0.834349,
+ 'tilt_1': 1.828981,
+ 'tilt_2': 1.652162,
+ 'psi': 2.851105,
+ 'phase': 2.138286,
+ 'geocent_time': 1126259462.414116,
+ 'time_jitter': 0.000033,
+ 'phi_12': 1.560456,
+ 'phi_jl': 0.997263,
 'lambda_1' : 0,
 'lambda_2' : 0}
 
