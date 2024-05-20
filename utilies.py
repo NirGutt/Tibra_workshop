@@ -230,13 +230,21 @@ def run_stocastic_sampler(data,model,psd,log_likelihood_func,prior_dict):
         return self.log_likelihood_func(data,model,self.parameters,psd)
 
 
+  def convert_m1_m2_to_z(parameters):
+    parameters['z'] = parameters['mass_1'] - parameters['mass_2']
+    return parameters
 
-
+  priors = PriorDict(conversion_function=convert_m1_m2_to_z)
+  priors['z'] = Constraint(minimum=0, maximum=30)
+        
   likelihood = SimpleGaussianLikelihood(data,model,log_likelihood_func,psd)
-  priors=partial_params.copy()
+  for k,v in partial_params.items(): 
+      priors[k]=v
+      
   for k,v in prior_dict.items():
     priors[k] = bilby.core.prior.Uniform(minimum=v[0],maximum=v[1],name=k)
-  print(priors  )
+      
+  print(priors )
   # And run sampler
   result = bilby.run_sampler(
       likelihood=likelihood,
