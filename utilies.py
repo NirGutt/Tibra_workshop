@@ -8,7 +8,7 @@ from scipy.stats import norm
 from gwpy.timeseries import TimeSeries
 import pandas as pd
 from mpl_toolkits.mplot3d import Axes3D
-
+from bilby.core.prior import PriorDict
 import tqdm
 import gdown
 import numpy as np
