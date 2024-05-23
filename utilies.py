@@ -112,7 +112,7 @@ bilby.core.utils.random.seed(88170235)
 
 
 partial_params={'theta_jn': 2.857621,# 3.097067,
- 'luminosity_distance': 4.2442+02,#557.248554,
+ 'luminosity_distance': 424.42,#557.248554,
  'ra': 1.649, # 0.97,
  'dec': -9.892981e-01,#-1.271,
  #'azimuth': 2.8110605307230103,
