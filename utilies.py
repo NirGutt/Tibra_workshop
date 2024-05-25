@@ -316,3 +316,28 @@ def extended_model(params):
   raise Exception('missing at least one parameter, input should contain mass_1,mass_2, ra, a_1, a_2  in a dict form')
 
  return model_GR(params)
+
+ifo_plot = bilby.gw.detector.get_empty_interferometer("H1")
+trigger_time1 = 1126259460.4
+post_trigger_duration1 = 2  # Time between trigger time and end of segment
+end_time1 = trigger_time1 + post_trigger_duration1
+start_time1 = end_time1 - 4
+data_ifo1 = TimeSeries.fetch_open_data("H1", start_time1, end_time1)
+ifo_plot.strain_data.set_from_gwpy_timeseries(data_ifo1)
+
+psd_duration1 = 32 * 4
+psd_start_time1 = start_time1 - psd_duration1
+psd_end_tim1e = start_time1
+
+roll_off = 0.4
+psd_data1 = TimeSeries.fetch_open_data("H1", psd_start_time1, psd_end_time1)
+psd_alpha1 = 2 * roll_off / 4
+psd1 = psd_data1.psd(
+        fftlength=4, overlap=0, window=("tukey", psd_alpha1), method="median"
+)
+ifo_plot.power_spectral_density = bilby.gw.detector.PowerSpectralDensity(
+        frequency_array=psd1.frequencies.value, psd_array=psd1.value
+    )
+ifo_plot.maximum_frequency = maximum_frequency
+ifo_plot.minimum_frequency = minimum_frequency
+
