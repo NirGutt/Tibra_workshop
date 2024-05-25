@@ -327,7 +327,7 @@ ifo_plot.strain_data.set_from_gwpy_timeseries(data_ifo1)
 
 psd_duration1 = 32 * 4
 psd_start_time1 = start_time1 - psd_duration1
-psd_end_tim1e = start_time1
+psd_end_time1 = start_time1
 
 roll_off = 0.4
 psd_data1 = TimeSeries.fetch_open_data("H1", psd_start_time1, psd_end_time1)
