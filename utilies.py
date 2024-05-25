@@ -86,10 +86,10 @@ def time_domain_model(params):
 def whiten_time_domain_model(params,psd):
 
   dt = (1/ifo.sampling_frequency)
-  norm =  np.sqrt(2 * dt)
+  norm =   np.sqrt(2. / ifo.sampling_frequency)
   hf= model_GR(params)
   Nt=len(hf)
-  hf_norm = hf *norm / np.sqrt(psd) 
+  hf_norm = hf *norm / ifo.amplitude_spectral_density_array
   t_axis = np.arange(0,Nt*dt,dt)-delta_t
   return t_axis,np.fft.irfft(hf_norm, n=Nt)
 
