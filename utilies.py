@@ -318,7 +318,7 @@ def extended_model(params):
  return model_GR(params)
 
 ifo_plot = bilby.gw.detector.get_empty_interferometer("H1")
-trigger_time1 = 1126259460.4
+trigger_time1 = 1126259462.4
 post_trigger_duration1 = 2  # Time between trigger time and end of segment
 end_time1 = trigger_time1 + post_trigger_duration1
 start_time1 = end_time1 - 4
