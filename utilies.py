@@ -343,12 +343,16 @@ def whiten_time_domain_model(params,psd):
   #hf_norm = hf *norm / ifo.amplitude_spectral_density_array
   #t_axis = np.arange(0,Nt*dt,dt)-delta_t
 
-
+   params_to_eval= partial_params.copy()
+   for k in partial_params.keys():
+     if k in params:
+       params_to_eval[k]=params[k]
+ 
   
    from bilby.core.utils import infft
 
-   wf_pols = waveform_generator.frequency_domain_strain(params)
-   fd_waveform = ifo.get_detector_response(wf_pols, params)
+   wf_pols = waveform_generator.frequency_domain_strain(params_to_eval)
+   fd_waveform = ifo.get_detector_response(wf_pols, params_to_eval)
           
    td_waveform = infft(
                 fd_waveform * np.sqrt(2. / ifo.sampling_frequency) /
