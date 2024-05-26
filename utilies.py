@@ -85,13 +85,28 @@ def time_domain_model(params):
 
 def whiten_time_domain_model(params,psd):
 
-  dt = (1/ifo.sampling_frequency)
-  norm =   np.sqrt(2. / ifo.sampling_frequency)
-  hf= model_GR(params)
-  Nt=len(hf)
-  hf_norm = hf *norm / ifo.amplitude_spectral_density_array
-  t_axis = np.arange(0,Nt*dt,dt)-delta_t
-  return t_axis,np.fft.irfft(hf_norm, n=Nt)
+  # previous version   
+  #dt = (1/ifo.sampling_frequency)
+  #norm =   np.sqrt(2. / ifo.sampling_frequency)
+  #hf= model_GR(params)
+  #Nt=len(hf)
+  #hf_norm = hf *norm / ifo.amplitude_spectral_density_array
+  #t_axis = np.arange(0,Nt*dt,dt)-delta_t
+
+
+  
+   from bilby.core.utils import infft
+
+   wf_pols = ut.waveform_generator.frequency_domain_strain(params)
+   fd_waveform = ut.ifo.get_detector_response(wf_pols, params)
+          
+   td_waveform = infft(
+                fd_waveform * np.sqrt(2. / ifo.sampling_frequency) /
+                ifo.amplitude_spectral_density_array,
+                ifo.sampling_frequency)  
+
+    
+  return td_waveform
 
 
 
