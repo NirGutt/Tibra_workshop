@@ -106,7 +106,7 @@ def whiten_time_domain_model(params,psd):
                 ifo.sampling_frequency)  
 
     
-  return td_waveform
+   return td_waveform
 
 
 
