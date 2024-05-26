@@ -83,30 +83,6 @@ def time_domain_model(params):
   return np.fft.irfft(model_GR(params)*norm)
 
 
-def whiten_time_domain_model(params,psd):
-
-  # previous version   
-  #dt = (1/ifo.sampling_frequency)
-  #norm =   np.sqrt(2. / ifo.sampling_frequency)
-  #hf= model_GR(params)
-  #Nt=len(hf)
-  #hf_norm = hf *norm / ifo.amplitude_spectral_density_array
-  #t_axis = np.arange(0,Nt*dt,dt)-delta_t
-
-
-  
-   from bilby.core.utils import infft
-
-   wf_pols = ut.waveform_generator.frequency_domain_strain(params)
-   fd_waveform = ut.ifo.get_detector_response(wf_pols, params)
-          
-   td_waveform = infft(
-                fd_waveform * np.sqrt(2. / ifo.sampling_frequency) /
-                ifo.amplitude_spectral_density_array,
-                ifo.sampling_frequency)  
-
-    
-   return td_waveform
 
 
 
@@ -356,3 +332,28 @@ ifo_plot.power_spectral_density = bilby.gw.detector.PowerSpectralDensity(
 ifo_plot.maximum_frequency = maximum_frequency
 ifo_plot.minimum_frequency = minimum_frequency
 
+
+def whiten_time_domain_model(params,psd):
+
+  # previous version   
+  #dt = (1/ifo.sampling_frequency)
+  #norm =   np.sqrt(2. / ifo.sampling_frequency)
+  #hf= model_GR(params)
+  #Nt=len(hf)
+  #hf_norm = hf *norm / ifo.amplitude_spectral_density_array
+  #t_axis = np.arange(0,Nt*dt,dt)-delta_t
+
+
+  
+   from bilby.core.utils import infft
+
+   wf_pols = waveform_generator.frequency_domain_strain(params)
+   fd_waveform = ifo.get_detector_response(wf_pols, params)
+          
+   td_waveform = infft(
+                fd_waveform * np.sqrt(2. / ifo.sampling_frequency) /
+                ifo.amplitude_spectral_density_array,
+                ifo.sampling_frequency)  
+
+    
+   return td_waveform
