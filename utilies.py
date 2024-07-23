@@ -191,7 +191,7 @@ data_freq =ifo.frequency_domain_strain
 #ifo.  to_gwpy_frequencyseries()
 
 
-def run_stocastic_sampler(data,model,psd,log_likelihood_func,prior_dict):
+def run_stocastic_sampler(data,model,psd,log_likelihood_func,prior_dict,nlive=50):
   # the prior_dict should contain teh min and max , and we assume evrything is a uniform distribution
 
 
@@ -245,7 +245,7 @@ def run_stocastic_sampler(data,model,psd,log_likelihood_func,prior_dict):
       naccept=1,
       resume=False,
       clean=True,
-      nlive=50,
+      nlive=nlive,
       npool=likelihood.ncores,
       outdir=outdir,
       label=label,
